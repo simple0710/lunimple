@@ -1,13 +1,15 @@
 package com.lunimple.domain.contest.service;
 
 import com.lunimple.domain.contest.dto.response.ContestResponse;
+import com.lunimple.domain.contest.enums.ContestType;
 import com.lunimple.domain.contest.repository.ContestRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -16,25 +18,57 @@ public class ContestService {
 
     private final ContestRepository contestRepository;
 
-    public List<ContestResponse> getUpcomingContests() {
+    public Page<ContestResponse> getUpcomingContests(
+            ContestType contestType,
+            Pageable pageable
+    ) {
 
-        return contestRepository
-                .findByStartTimeAfterOrderByStartTimeAsc(
-                        LocalDateTime.now()
-                )
-                .stream()
-                .map(ContestResponse::from)
-                .toList();
+        Page<ContestResponse> contest;
+
+        if (contestType == null) {
+            contest = contestRepository
+                    .findByStartTimeAfterOrderByStartTimeAsc(
+                            LocalDateTime.now(),
+                            pageable
+                    )
+                    .map(ContestResponse::from);
+        } else {
+            contest = contestRepository
+                    .findByContestTypeAndStartTimeAfterOrderByStartTimeAsc(
+                            contestType,
+                            LocalDateTime.now(),
+                            pageable
+                    )
+                    .map(ContestResponse::from);
+        }
+
+        return contest;
     }
 
-    public List<ContestResponse> getPastContests() {
+    public Page<ContestResponse> getPastContests(
+            ContestType contestType,
+            Pageable pageable
+    ) {
 
-        return contestRepository
-                .findByStartTimeBeforeOrderByStartTimeDesc(
-                        LocalDateTime.now()
-                )
-                .stream()
-                .map(ContestResponse::from)
-                .toList();
+        Page<ContestResponse> contest;
+
+        if (contestType == null) {
+            contest = contestRepository
+                    .findByStartTimeBeforeOrderByStartTimeDesc(
+                            LocalDateTime.now(),
+                            pageable
+                    )
+                    .map(ContestResponse::from);
+        } else {
+            contest = contestRepository
+                    .findByContestTypeAndStartTimeBeforeOrderByStartTimeDesc(
+                            contestType,
+                            LocalDateTime.now(),
+                            pageable
+                    )
+                    .map(ContestResponse::from);
+        }
+
+        return contest;
     }
 }
