@@ -26,4 +26,15 @@ public class ContestService {
                 .map(ContestResponse::from)
                 .toList();
     }
+
+    public List<ContestResponse> getPastContests() {
+
+        return contestRepository
+                .findByStartTimeBeforeOrderByStartTimeDesc(
+                        LocalDateTime.now()
+                )
+                .stream()
+                .map(ContestResponse::from)
+                .toList();
+    }
 }

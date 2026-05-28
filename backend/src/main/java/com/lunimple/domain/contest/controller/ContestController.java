@@ -24,4 +24,11 @@ public class ContestController {
                 contestService.getUpcomingContests()
         );
     }
+
+    @GetMapping("/past")
+    public ApiResponse<List<ContestResponse>> getPastContest() {
+        return ApiResponse.success(
+                contestService.getPastContests()
+        );
+    }
 }
