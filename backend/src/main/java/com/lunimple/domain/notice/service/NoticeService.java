@@ -1,7 +1,7 @@
 package com.lunimple.domain.notice.service;
 
+import com.lunimple.domain.notice.dto.response.NoticeDetailResponse;
 import com.lunimple.domain.notice.dto.response.NoticeResponse;
-import com.lunimple.domain.notice.entity.Notice;
 import com.lunimple.domain.notice.enums.NoticeImportance;
 import com.lunimple.domain.notice.repository.NoticeRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,5 +34,11 @@ public class NoticeService {
                     .map(NoticeResponse::from);
         }
         return notice;
+    }
+
+    public NoticeDetailResponse getNoticeDetail(Long id) {
+        return noticeRepository.findById(id)
+                .map(NoticeDetailResponse::from)
+                .orElseThrow(IllegalArgumentException::new);
     }
 }

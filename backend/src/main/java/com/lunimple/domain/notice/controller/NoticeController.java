@@ -1,5 +1,6 @@
 package com.lunimple.domain.notice.controller;
 
+import com.lunimple.domain.notice.dto.response.NoticeDetailResponse;
 import com.lunimple.domain.notice.dto.response.NoticeResponse;
 import com.lunimple.domain.notice.enums.NoticeImportance;
 import com.lunimple.domain.notice.service.NoticeService;
@@ -8,10 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,6 +31,17 @@ public class NoticeController {
                 noticeService.getNotices(
                         importance,
                         pageable
+                )
+        );
+    }
+
+    @GetMapping("/{id}")
+    public ApiResponse<NoticeDetailResponse> getNoticeDetail(
+            @PathVariable Long id
+    ) {
+        return ApiResponse.success(
+                noticeService.getNoticeDetail(
+                        id
                 )
         );
     }
