@@ -1,5 +1,6 @@
 package com.lunimple.domain.contest.controller;
 
+import com.lunimple.domain.contest.dto.response.ContestProblemListResponse;
 import com.lunimple.domain.contest.dto.response.ContestResponse;
 import com.lunimple.domain.contest.enums.ContestType;
 import com.lunimple.domain.contest.service.ContestService;
@@ -51,6 +52,19 @@ public class ContestController {
                         contestType,
                         pageable
                 )
+        );
+    }
+
+    @GetMapping("/problems")
+    public ApiResponse<Page<ContestProblemListResponse>> getContestProblems(
+            @RequestParam(defaultValue = "1", required = false) int page,
+            @RequestParam(defaultValue = "10", required = false) int size
+    ) {
+
+        Pageable pageable = PageRequest.of(page - 1, size);
+
+        return ApiResponse.success(
+                contestService.getContestProblems(pageable)
         );
     }
 }

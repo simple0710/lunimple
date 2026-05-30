@@ -1,8 +1,11 @@
 package com.lunimple.domain.contest.service;
 
+import com.lunimple.domain.contest.dto.response.ContestProblemListResponse;
 import com.lunimple.domain.contest.dto.response.ContestResponse;
+import com.lunimple.domain.contest.entity.Contest;
 import com.lunimple.domain.contest.enums.ContestType;
 import com.lunimple.domain.contest.repository.ContestRepository;
+import com.lunimple.domain.problems.entity.Problem;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -70,5 +74,13 @@ public class ContestService {
         }
 
         return contest;
+    }
+
+    @Transactional(readOnly = true)
+    public Page<ContestProblemListResponse> getContestProblems(
+            Pageable pageable
+    ) {
+        return contestRepository.findAll(pageable)
+                .map(ContestProblemListResponse::from);
     }
 }

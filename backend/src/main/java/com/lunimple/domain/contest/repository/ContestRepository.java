@@ -2,12 +2,15 @@ package com.lunimple.domain.contest.repository;
 
 import com.lunimple.domain.contest.entity.Contest;
 import com.lunimple.domain.contest.enums.ContestType;
+import com.lunimple.domain.problems.entity.Problem;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Repository
 public interface ContestRepository extends JpaRepository<Contest, Long> {
@@ -34,6 +37,10 @@ public interface ContestRepository extends JpaRepository<Contest, Long> {
     Page<Contest> findByContestTypeAndStartTimeBeforeOrderByStartTimeDesc(
             ContestType contestType,
             LocalDateTime now,
+            Pageable pageable
+    );
+
+    Page<Contest> findAll(
             Pageable pageable
     );
 }

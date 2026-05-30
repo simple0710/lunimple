@@ -2,6 +2,7 @@ package com.lunimple.domain.contest.entity;
 
 import com.lunimple.domain.common.entity.BaseTimeEntity;
 import com.lunimple.domain.contest.enums.ContestType;
+import com.lunimple.domain.problems.entity.Problem;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -9,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -66,8 +69,14 @@ public class Contest extends BaseTimeEntity {
     @Column(nullable = false, unique = true)
     private String contestUrl;
 
+    @OneToMany(
+            mappedBy = "contest",
+            fetch = FetchType.LAZY
+    )
+    private List<Problem> problems;
+
     @Builder
-    public Contest(
+    private Contest(
             String name,
             LocalDateTime startTime,
             Integer durationMinutes,
