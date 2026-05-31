@@ -1,6 +1,7 @@
 package com.lunimple.domain.user.controller;
 
 import com.lunimple.domain.user.dto.response.UserProfileResponse;
+import com.lunimple.domain.user.dto.response.UserStreakResponse;
 import com.lunimple.domain.user.service.UserService;
 import com.lunimple.global.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,15 @@ public class UserController {
     ) {
         return ApiResponse.success(
                 userService.getUserProfile(handle)
+        );
+    }
+
+    @GetMapping("/{handle}/streak")
+    public ApiResponse<UserStreakResponse> getUserStreak(
+            @PathVariable String handle
+    ) {
+        return ApiResponse.success(
+                userService.getUserStreak(handle)
         );
     }
 }

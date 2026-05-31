@@ -2,18 +2,24 @@ package com.lunimple.domain.user.service;
 
 import com.lunimple.domain.user.dto.response.RankingResponse;
 import com.lunimple.domain.user.dto.response.UserProfileResponse;
+import com.lunimple.domain.user.dto.response.UserStreakResponse;
+import com.lunimple.domain.user.entity.User;
 import com.lunimple.domain.user.entity.UserProblem;
 import com.lunimple.domain.user.enums.RankingSortType;
 import com.lunimple.domain.user.repository.UserProblemRepository;
 import com.lunimple.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cglib.core.Local;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -96,5 +102,24 @@ public class UserService {
                 pageable
                 )
                 .map(RankingResponse::from);
+    }
+
+    public UserStreakResponse getUserStreak(String handle) {
+        User user = userRepository.findByHandle(handle);
+        List<UserProblem> userProblems = userProblemRepository.findAllByUserId(user.getId());
+        Set<LocalDate> solvedDates = userProblems.stream()
+                .filter(UserProblem::getSolved)
+                .map(up -> up.getSolvedAt().toLocalDate())
+                .collect(Collectors.toSet());
+
+        LocalDate date = LocalDate.now();
+        int streak = 0;
+        if (!solvedDates.contains(date)) date = date.minusDays(1);
+
+        while (solvedDates.contains(date)) {
+            streak++;
+            date = date.minusDays(1);
+        }
+        return UserStreakResponse.of(streak);
     }
 }
