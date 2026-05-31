@@ -1,7 +1,10 @@
 package com.lunimple.domain.user.service;
 
 import com.lunimple.domain.user.dto.response.RankingResponse;
+import com.lunimple.domain.user.dto.response.UserProfileResponse;
+import com.lunimple.domain.user.entity.UserProblem;
 import com.lunimple.domain.user.enums.RankingSortType;
+import com.lunimple.domain.user.repository.UserProblemRepository;
 import com.lunimple.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -10,11 +13,65 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UserProblemRepository userProblemRepository;
+
+    public UserProfileResponse getUserProfile(String handle) {
+        Long userId = userRepository.findByHandle(handle).getId();
+        List<UserProblem> userProblems = userProblemRepository.findAllByUserId(userId);
+
+        int totalSolved = 0;
+        int totalAttempt = 0;
+        int solvedRatingSum = 0;
+        int triedProblemCount = userProblems.size();
+
+        for (UserProblem userProblem : userProblems) {
+            totalAttempt += userProblem.getAttemptCount();
+
+            if (userProblem.getSolved()) {
+                totalSolved++;
+                solvedRatingSum += userProblem.getProblem().getDifficulty();
+            }
+        }
+
+        double averageSolvedRating =
+                totalSolved == 0 ? 0 :
+                        Math.round((double) solvedRatingSum / totalSolved * 100) / 100.0;
+
+        double averageSubmissionCount =
+                totalSolved == 0 ? 0 :
+                        Math.round((double) totalAttempt / totalSolved * 100) / 100.0;
+
+        double successRate =
+                triedProblemCount == 0 ? 0 :
+                        Math.round((double) totalSolved * 100 / triedProblemCount * 100) / 100.0;
+        // 전체 해결 문제 수
+
+        // 해결한 문제들의 평균 레이팅
+        // (해결한 문제 레이팅 총합 / 해결한 문제 수)
+
+        /**
+         * 문제당 평균 제출 횟수
+         * (전체 제출 횟수 / 해결한 문제 수)
+         */
+
+        /**
+         * 성공률
+         * (해결한 문제 수 / 시도한 문제 수) × 100
+         */
+        return UserProfileResponse.of(
+                totalSolved,
+                averageSolvedRating,
+                averageSubmissionCount,
+                successRate
+        );
+    }
 
     public Page<RankingResponse> getRanking(
             RankingSortType rankingSortType,
