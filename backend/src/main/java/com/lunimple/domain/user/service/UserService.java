@@ -1,15 +1,14 @@
 package com.lunimple.domain.user.service;
 
-import com.lunimple.domain.user.dto.response.RankingResponse;
-import com.lunimple.domain.user.dto.response.UserProfileResponse;
-import com.lunimple.domain.user.dto.response.UserStreakResponse;
+import com.lunimple.domain.contest.enums.ContestType;
+import com.lunimple.domain.problems.enums.ProblemCode;
+import com.lunimple.domain.user.dto.response.*;
 import com.lunimple.domain.user.entity.User;
 import com.lunimple.domain.user.entity.UserProblem;
 import com.lunimple.domain.user.enums.RankingSortType;
 import com.lunimple.domain.user.repository.UserProblemRepository;
 import com.lunimple.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cglib.core.Local;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -121,5 +121,57 @@ public class UserService {
             date = date.minusDays(1);
         }
         return UserStreakResponse.of(streak);
+    }
+
+    public UserStatisticsResponse getUserStatistics(String handle) {
+        Long userId = userRepository.findByHandle(handle).getId();
+        List<UserProblem> userProblems = userProblemRepository.findAllByUserId(userId);
+        Map<ContestType, Map<ProblemCode, List<UserProblem>>> grouped =
+                userProblems.stream()
+                        .collect(Collectors.groupingBy(
+                                up -> up.getProblem()
+                                        .getContest()
+                                        .getContestType(),
+                                Collectors.groupingBy(
+                                        up -> up.getProblem().getCode()
+                                )
+                        ));
+
+        List<ContestStatisticsResponse> statistics = grouped.entrySet()
+                .stream()
+                .map(contestEntry -> {
+
+                    List<ProblemStatisticsResponse> problems =
+                            contestEntry.getValue()
+                                    .entrySet()
+                                    .stream()
+                                    .map(problemEntry -> {
+
+                                        List<UserProblem> list =
+                                                problemEntry.getValue();
+
+                                        int total = list.size();
+
+                                        int solved = (int) list.stream()
+                                                .filter(UserProblem::getSolved)
+                                                .count();
+
+                                        return new ProblemStatisticsResponse(
+                                                problemEntry.getKey(),
+                                                total,
+                                                solved
+                                        );
+                                    })
+                                    .toList();
+
+                    return new ContestStatisticsResponse(
+                            contestEntry.getKey(),
+                            problems
+                    );
+                })
+                .toList();
+        return UserStatisticsResponse.of(
+                statistics
+        );
     }
 }
