@@ -18,21 +18,15 @@ public class Notice extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /**
-     * 공지 제목
-     */
     @Column(nullable = false)
     private String title;
 
-    /**
-     * 공지 내용
-     */
     @Column(nullable = false)
     private String content;
 
-    /**
-     * 공지 작성자
-     */
+    @Column(nullable = false)
+    private String url;
+
     @Column(nullable = false)
     private String writer;
 
@@ -43,11 +37,13 @@ public class Notice extends BaseTimeEntity {
     private Notice(
             String title,
             String content,
+            String url,
             String writer,
             NoticeImportance importance
     ) {
         this.title = title;
         this.content = content;
+        this.url = url;
         this.writer = writer;
         this.importance = importance;
     }

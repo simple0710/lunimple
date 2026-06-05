@@ -8,6 +8,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 @Transactional
@@ -17,35 +19,32 @@ public class NoticeDataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        noticeRepository.deleteAll();
 
-        if (noticeRepository.count() > 0) {
-            return;
-        }
+        List<Notice> notices = List.of(
+                Notice.builder()
+                        .title("AGC Proctoring Rules")
+                        .content("AGC Proctoring Rules announcement")
+                        .url("https://atcoder.jp/posts/agc_proctoring_en")
+                        .writer("AtCoder")
+                        .importance(NoticeImportance.IMPORTANT)
+                        .build(),
+                Notice.builder()
+                        .title("ARC221 (English)")
+                        .content("ARC221 announcement in English")
+                        .url("https://atcoder.jp/posts/arc221_en")
+                        .writer("AtCoder")
+                        .importance(NoticeImportance.RECENT)
+                        .build(),
+                Notice.builder()
+                        .title("ARC221 (Japanese)")
+                        .content("ARC221 announcement in Japanese")
+                        .url("https://atcoder.jp/posts/arc221_ja")
+                        .writer("AtCoder")
+                        .importance(NoticeImportance.RECENT)
+                        .build()
+        );
 
-        Notice important = Notice
-                .builder()
-                .title("AGC Proctoring Rules")
-                .content("content")
-                .writer("admin")
-                .importance(NoticeImportance.IMPORTANT)
-                .build();
-        Notice normal = Notice
-                .builder()
-                .title("normal notice")
-                .content("content")
-                .writer("admin")
-                .importance(NoticeImportance.NORMAL)
-                .build();
-        Notice urgent = Notice
-                .builder()
-                .title("urgent")
-                .content("content")
-                .writer("admin")
-                .importance(NoticeImportance.URGENT)
-                .build();
-
-        noticeRepository.save(important);
-        noticeRepository.save(normal);
-        noticeRepository.save(urgent);
+        noticeRepository.saveAll(notices);
     }
 }
