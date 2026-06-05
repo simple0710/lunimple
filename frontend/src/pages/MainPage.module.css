@@ -1,0 +1,133 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 32px 0;
+}
+
+.searchSection {
+  display: flex;
+  justify-content: center;
+}
+
+/* 공지 + 오늘의 문제: 넓을 때 2열, 좁을 때 1열 */
+.topSection {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px;
+  align-items: start;
+}
+
+.noticeBox,
+.dailyProblem {
+  min-width: 0;
+}
+
+.sectionTitle {
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* 대회 3열 → 2열 → 1열 */
+.contestSection {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  align-items: start;
+}
+
+.loading {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #aaa;
+}
+
+.featureSection {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  padding: 24px 0;
+  flex-wrap: wrap;
+}
+
+.featureCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  color: #333;
+  font-size: 14px;
+}
+
+.icon {
+  font-size: 48px;
+}
+
+.tagline {
+  text-align: center;
+  font-size: 15px;
+  color: #555;
+}
+
+/* 1400px 미만: 대회 영역 2+1 */
+@media (max-width: 1400px) {
+  .contestSection {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .contestSection > :last-child {
+    grid-column: 1 / -1;
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+/* 1200px 미만: 상단 1열, 대회 1열 스택 */
+@media (max-width: 1200px) {
+  .topSection {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    max-width: 520px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .contestSection {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    max-width: 640px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .contestSection > :last-child {
+    grid-column: auto;
+    max-width: none;
+  }
+}
+
+/* 992px 미만: 패딩·간격 축소 */
+@media (max-width: 992px) {
+  .page {
+    gap: 24px;
+    padding: 24px 0;
+  }
+
+  .featureSection {
+    gap: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .featureSection {
+    gap: 24px;
+  }
+
+  .icon {
+    font-size: 40px;
+  }
+}

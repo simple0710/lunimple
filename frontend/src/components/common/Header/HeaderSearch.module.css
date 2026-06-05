@@ -1,0 +1,38 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #fff;
+  min-width: 200px;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 14px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #333;
+}
+
+.button {
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    min-width: 140px;
+  }
+
+  .input {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+}

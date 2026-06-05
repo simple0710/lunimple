@@ -1,0 +1,66 @@
+@import './variables.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 17px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--color-text);
+  background: #fafafa;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+}
+
+.layoutContainer {
+  width: 100%;
+  max-width: var(--layout-max-width);
+  margin: 0 auto;
+  padding-left: var(--layout-padding);
+  padding-right: var(--layout-padding);
+}
+
+@media (max-width: 1200px) {
+  .layoutContainer {
+    padding-left: var(--layout-padding-md);
+    padding-right: var(--layout-padding-md);
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+
+  .layoutContainer {
+    padding-left: var(--layout-padding-sm);
+    padding-right: var(--layout-padding-sm);
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+}

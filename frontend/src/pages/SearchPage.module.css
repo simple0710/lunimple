@@ -1,0 +1,246 @@
+.page {
+  padding: 32px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.hint,
+.loading,
+.empty {
+  text-align: center;
+  font-size: 15px;
+  color: #888;
+}
+
+.warn {
+  text-align: center;
+  font-size: 14px;
+  color: #e65100;
+  background: #fff3e0;
+  padding: 10px 16px;
+  border-radius: 6px;
+  margin: 0;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.cardTitle {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* INFO: 프로필 | 통계 | 스트릭 */
+.infoLayout {
+  display: grid;
+  grid-template-columns: 160px 1fr minmax(280px, 1.2fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.profileCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: contain;
+  background: #1a1a2e;
+  padding: 8px;
+}
+
+.handleText {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.ratingText {
+  font-size: 14px;
+  color: #777;
+  margin: 0;
+}
+
+.statsCol {
+  min-width: 0;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(150px, 1fr));
+  gap: 14px;
+}
+
+.statBox {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px 14px;
+  text-align: center;
+}
+
+.statLabel {
+  font-size: 12px;
+  color: #888;
+  margin: 0 0 6px;
+}
+
+.statValue {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.statSub {
+  font-size: 12px;
+  color: #666;
+  margin: 4px 0 0;
+}
+
+.streakCol {
+  min-width: 0;
+  width: 100%;
+}
+
+.chartLayout {
+  display: grid;
+  grid-template-columns: minmax(260px, 340px) 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.chartItem {
+  min-width: 0;
+}
+
+.chartItemWide {
+  min-width: 0;
+  min-height: 260px;
+}
+
+.insight {
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+  margin-top: 12px;
+}
+
+.weaknessLayout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px;
+}
+
+.weaknessSection h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.weaknessList {
+  list-style: disc;
+  padding-left: 18px;
+  font-size: 14px;
+  color: #444;
+  line-height: 2;
+}
+
+.recCount {
+  text-align: right;
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 12px;
+}
+
+.recGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 14px;
+}
+
+.recCard {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px 12px;
+  text-align: center;
+}
+
+.recType {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.recHint {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.recDiff {
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.recTitle {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  word-break: break-word;
+}
+
+.recBtn {
+  display: inline-block;
+  padding: 6px 16px;
+  background: transparent;
+  border: 1px solid #00bcd4;
+  color: #00bcd4;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.recBtn:hover {
+  background: rgba(0, 188, 212, 0.08);
+}
+
+@media (max-width: 1200px) {
+  .infoLayout {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .streakCol {
+    grid-column: 1 / -1;
+  }
+
+  .chartLayout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .infoLayout {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .statsGrid {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .weaknessLayout {
+    grid-template-columns: 1fr;
+  }
+}

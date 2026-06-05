@@ -1,0 +1,52 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+.important {
+  color: #e53935;
+  font-weight: 600;
+  white-space: nowrap;
+  width: 48px;
+}
+
+.normal {
+  color: #555;
+  white-space: nowrap;
+  width: 48px;
+}
+
+.title {
+  word-break: break-word;
+}
+
+.link {
+  color: #00bcd4;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.date {
+  color: #888;
+  white-space: nowrap;
+  text-align: right;
+  width: 56px;
+}
+
+.loading,
+.empty {
+  text-align: center;
+  color: #aaa;
+  font-size: 14px;
+  padding: 12px;
+}

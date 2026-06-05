@@ -1,0 +1,97 @@
+.header {
+  padding: 12px 0;
+  border-bottom: 1px solid #333;
+  background: #1a1a2e;
+}
+
+.inner {
+  max-width: var(--layout-max-width);
+  margin: 0 auto;
+  padding: 0 var(--layout-padding);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.logoLink:hover .logoText {
+  color: #4dd0e1;
+}
+
+.logoImg {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.logoText {
+  font-size: 20px;
+  font-weight: 700;
+  color: #00bcd4;
+  letter-spacing: 1px;
+  transition: color 0.15s;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navLink {
+  padding: 8px 16px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #b0bec5;
+  border-radius: 6px;
+  transition:
+    color 0.15s,
+    background 0.15s;
+}
+
+.navLink:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.active {
+  color: #00bcd4;
+  background: rgba(0, 188, 212, 0.12);
+}
+
+.right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 1200px) {
+  .inner {
+    padding: 0 var(--layout-padding-md);
+  }
+}
+
+@media (max-width: 768px) {
+  .inner {
+    padding: 0 var(--layout-padding-sm);
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .logoText {
+    display: none;
+  }
+
+  .right {
+    width: 100%;
+    margin-left: 0;
+    order: 3;
+  }
+}

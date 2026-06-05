@@ -1,0 +1,103 @@
+.wrapper {
+  width: 100%;
+  min-width: 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.streakLabel {
+  font-size: 15px;
+  margin: 0;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.modeBtn {
+  padding: 5px 12px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.modeActive {
+  background: #7c6cfc;
+  color: #fff;
+  border-color: #7c6cfc;
+}
+
+.yearSelect {
+  padding: 5px 8px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.rangeLabel {
+  font-size: 13px;
+  color: #888;
+  margin: 0 0 10px;
+}
+
+.heatmap {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.weekdayCol {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-top: 0;
+  flex-shrink: 0;
+}
+
+.weekday {
+  width: 12px;
+  height: 12px;
+  font-size: 10px;
+  color: #999;
+  line-height: 12px;
+  text-align: center;
+}
+
+.weeks {
+  display: flex;
+  gap: 3px;
+}
+
+.weekCol {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.cell {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  background: #e8e8e8;
+}
+
+.cellEmpty {
+  width: 12px;
+  height: 12px;
+}
+
+.active {
+  background: #7c6cfc;
+}

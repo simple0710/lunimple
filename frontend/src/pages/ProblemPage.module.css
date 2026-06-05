@@ -1,0 +1,205 @@
+.page {
+  padding: 32px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.filterBox {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.filterRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.handleInput {
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  min-width: 160px;
+}
+
+.typeButtons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.typeBtn {
+  padding: 6px 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.typeBtn.active {
+  background: #1a1a2e;
+  color: white;
+  border-color: #1a1a2e;
+}
+
+.checkboxGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.scoreFilter {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.scoreRow {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  font-weight: 600;
+  flex-wrap: wrap;
+}
+
+.statTotal {
+  color: #333;
+}
+.statAc {
+  color: #2e7d32;
+}
+.statWa {
+  color: #e53935;
+}
+.statNn {
+  color: #9e9e9e;
+}
+.band1 {
+  color: #555;
+}
+.band2 {
+  color: #8d5524;
+}
+.band3 {
+  color: #00acc1;
+}
+.band4 {
+  color: #6a1b9a;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+.table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+}
+
+.table th {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 2px solid #ddd;
+  font-size: 14px;
+  background: #fafafa;
+}
+
+.contestName {
+  padding: 16px 20px;
+  font-weight: 700;
+  font-size: 15px;
+  border-bottom: 1px solid #eee;
+  white-space: nowrap;
+  position: sticky;
+  left: 0;
+  background: #fff;
+  z-index: 1;
+}
+
+.contestName a {
+  color: #333;
+}
+
+.problemCell {
+  padding: 12px 8px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  font-size: 12px;
+  vertical-align: top;
+}
+
+.problemTitle a {
+  color: #00bcd4;
+}
+
+.problemTitle {
+  margin-bottom: 4px;
+}
+
+.problemScore {
+  color: #999;
+  font-size: 11px;
+}
+
+.noProblem {
+  color: #ccc;
+}
+
+.loading,
+.error,
+.empty {
+  text-align: center;
+  font-size: 14px;
+  padding: 12px;
+}
+
+.error {
+  color: #e53935;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.pagination button {
+  padding: 6px 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1200px) {
+  .scoreFilter {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+@media (max-width: 992px) {
+  .filterRow {
+    flex-direction: column;
+    gap: 16px;
+  }
+}

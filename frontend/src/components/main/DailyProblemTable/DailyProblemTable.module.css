@@ -1,0 +1,26 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.table td {
+  padding: 5px 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.table a {
+  color: #00bcd4;
+}
+
+.table a:hover {
+  text-decoration: underline;
+}
+
+.loading,
+.empty {
+  text-align: center;
+  color: #aaa;
+  font-size: 13px;
+  padding: 12px;
+}
