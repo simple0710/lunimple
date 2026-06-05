@@ -1,5 +1,7 @@
 package com.lunimple.domain.user.controller;
 
+import com.lunimple.domain.recommendation.dto.response.RecommendationResponse;
+import com.lunimple.domain.recommendation.service.RecommendationService;
 import com.lunimple.domain.user.dto.response.UserProfileResponse;
 import com.lunimple.domain.user.dto.response.UserRecommendationResponse;
 import com.lunimple.domain.user.dto.response.UserStatisticsResponse;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
+    private final RecommendationService recommendationService;
 
     @GetMapping("/{handle}")
     public ApiResponse<UserProfileResponse> getUserProfile(
@@ -54,11 +57,11 @@ public class UserController {
     }
 
     @GetMapping("/{handle}/recommendations")
-    public ApiResponse<UserRecommendationResponse> getRecommendations(
+    public ApiResponse<RecommendationResponse> getRecommendations(
             @PathVariable String handle
     ) {
         return ApiResponse.success(
-                userService.getUserRecommendations(handle)
+                recommendationService.getRecommendations(handle)
         );
     }
 }
