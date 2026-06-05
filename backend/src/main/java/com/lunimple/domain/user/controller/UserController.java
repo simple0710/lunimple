@@ -1,6 +1,7 @@
 package com.lunimple.domain.user.controller;
 
 import com.lunimple.domain.user.dto.response.UserProfileResponse;
+import com.lunimple.domain.user.dto.response.UserRecommendationResponse;
 import com.lunimple.domain.user.dto.response.UserStatisticsResponse;
 import com.lunimple.domain.user.dto.response.UserStreakResponse;
 import com.lunimple.domain.user.dto.response.UserWeaknessResponse;
@@ -49,6 +50,15 @@ public class UserController {
     ) {
         return ApiResponse.success(
                 userService.getUserWeakness(handle)
+        );
+    }
+
+    @GetMapping("/{handle}/recommendations")
+    public ApiResponse<UserRecommendationResponse> getRecommendations(
+            @PathVariable String handle
+    ) {
+        return ApiResponse.success(
+                userService.getUserRecommendations(handle)
         );
     }
 }
