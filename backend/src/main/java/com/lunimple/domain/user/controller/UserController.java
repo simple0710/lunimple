@@ -57,11 +57,11 @@ public class UserController {
     }
 
     @GetMapping("/{handle}/recommendations")
-    public ApiResponse<RecommendationResponse> getRecommendations(
+    public ApiResponse<UserRecommendationResponse> getRecommendations(
             @PathVariable String handle
     ) {
         return ApiResponse.success(
-                recommendationService.getRecommendations(handle)
+                userService.getUserRecommendations(handle)
         );
     }
 }
