@@ -44,8 +44,8 @@ public class User extends BaseTimeEntity {
     /**
      * 대회 참여 횟수
      */
-    @Column(nullable = false)
-    private Integer match;
+    @Column(name = "match_count", nullable = false)
+    private Integer matchCount;
 
     /**
      * 지역
@@ -60,14 +60,14 @@ public class User extends BaseTimeEntity {
             Integer rating,
             Integer highest,
             Integer win,
-            Integer match,
+            Integer matchCount,
             Country country
     ) {
         this.handle = handle;
         this.rating = rating;
         this.highest = highest;
         this.win = win;
-        this.match = match;
+        this.matchCount = matchCount;
         this.country = country;
     }
 }

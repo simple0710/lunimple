@@ -19,7 +19,7 @@ public record RankingResponse(
                 user.getRating(),
                 user.getHighest(),
                 user.getWin(),
-                user.getMatch(),
+                user.getMatchCount(),
                 user.getCountry().getCode()
         );
     }

@@ -48,7 +48,7 @@ public class UserDateInitializer implements CommandLineRunner {
                 .country(kr)
                 .rating(782)
                 .highest(782)
-                .match(13)
+                .matchCount(13)
                 .win(24)
                 .build();
         User user2 = User
@@ -57,7 +57,7 @@ public class UserDateInitializer implements CommandLineRunner {
                 .country(us)
                 .rating(3797)
                 .highest(4229)
-                .match(71)
+                .matchCount(71)
                 .win(23)
                 .build();
         User user3 = User
@@ -66,7 +66,7 @@ public class UserDateInitializer implements CommandLineRunner {
                 .country(jp)
                 .rating(3538)
                 .highest(3724)
-                .match(80)
+                .matchCount(80)
                 .win(1)
                 .build();
 
